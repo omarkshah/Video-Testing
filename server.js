@@ -15,10 +15,14 @@ io.on('connection', socket => {
 
     console.log('new socket connection made');
 
-    io.emit('show-Webcam', );
+    socket.on('join', userId => {
+        socket.emit('user-connected', userId)
+    } );
 
 
 });
+
+
 
 
 const PORT =  process.env.PORT ||3000 ;
