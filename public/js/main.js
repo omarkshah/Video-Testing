@@ -9,6 +9,14 @@ myVideo.muted = true;
 
 socket.on("show-Webcam", () => {
 
+    getUsersMedias();
+   
+
+});
+
+
+
+function getUsersMedias(){
     navigator.mediaDevices.getUserMedia({
         video: true,
         audio: true
@@ -16,9 +24,7 @@ socket.on("show-Webcam", () => {
         addVideoStream(myVideo, stream)
     })
     
-
-});
-
+}
 
 
 function addVideoStream(video, stream){
