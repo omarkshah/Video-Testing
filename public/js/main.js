@@ -2,9 +2,9 @@ const socket = io();
 
 videoArea = document.getElementById("video-area");
 
-var peer = new Peer();
+var myPeer = new Peer();
 
-peer.on('open', id=>{
+myPeer.on('open', id=>{
     console.log('peer id is ' + id);
 })
 
@@ -19,6 +19,14 @@ myVideo.muted = true;
     }).then(stream => {
         addVideoStream(myVideo, stream)
 
+        myPeer.on('call', call => {
+            call.answer(stream)
+            const video = document.createElement('video')
+            call.on('stream', userVideoStream => {
+              addVideoStream(video, userVideoStream)
+            })
+          })
+        
         socket.on('user-connected', userId => {
             connectToNewUser(userId, stream);
         })
